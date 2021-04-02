@@ -20,8 +20,7 @@ public class BoxServiceImpl implements BoxService {
 	
 	@Override
 	public List<Box> allBoxes() {
-		// TODO Auto-generated method stub
-		return null;
+		return boxRepo.findAll();
 	}
 
 	@Override
