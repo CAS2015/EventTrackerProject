@@ -42,9 +42,21 @@ class LocationTest {
 	}
 
 	@Test
-	void test_Box_entity_mapping() {
+	void test_Location_entity_mapping() {
 		assertNotNull(location);
 		assertEquals("Storage Unit", location.getType());
+	}
+	
+	@Test
+	void test_Location_to_User_relational_mapping() {
+		assertNotNull(location.getUser());
+		assertEquals(1, location.getUser().getId());
+	}
+	
+	@Test
+	void test_Location_to_Box_relational_mapping() {
+		assertNotNull(location.getBoxes());
+		assertEquals(1, location.getBoxes().size());
 	}
 
 }

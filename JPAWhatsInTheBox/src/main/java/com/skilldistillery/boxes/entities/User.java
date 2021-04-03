@@ -1,12 +1,16 @@
 package com.skilldistillery.boxes.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -35,7 +39,11 @@ public class User {
 	
 	private boolean active;
 	
-
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+	private List<Location> locations;
+	
+//////////Methods
 	public User() {
 	}
 	
@@ -109,6 +117,14 @@ public class User {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public List<Location> getLocations() {
+		return locations;
+	}
+
+	public void setLocations(List<Location> locations) {
+		this.locations = locations;
 	}
 
 	@Override

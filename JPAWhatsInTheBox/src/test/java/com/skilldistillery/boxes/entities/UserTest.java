@@ -42,10 +42,16 @@ class UserTest {
 	}
 
 	@Test
-	void test_Box_entity_mapping() {
+	void test_User_entity_mapping() {
 		assertNotNull(user);
 		assertEquals("Wally", user.getFirstName());
 		assertEquals("Wallington", user.getLastName());
+	}
+	
+	@Test
+	void test_User_to_Location_relational_mapping() {
+		assertNotNull(user.getLocations());
+		assertEquals(1, user.getLocations().size());
 	}
 
 }

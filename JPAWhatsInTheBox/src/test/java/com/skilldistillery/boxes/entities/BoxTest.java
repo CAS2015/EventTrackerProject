@@ -47,5 +47,11 @@ class BoxTest {
 		assertEquals("Bedroom Closet 1", box.getName());
 		assertEquals(false, box.isFragile());
 	}
+	
+	@Test
+	void test_Box_to_Location_relational_mapping() {
+		assertNotNull(box.getLocation());
+		assertEquals(1, box.getLocation().getId());
+	}
 
 }

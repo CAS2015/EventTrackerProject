@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Box {
@@ -41,7 +43,12 @@ public class Box {
 	
 	private boolean active;
 	
-
+	@ManyToOne
+	@JoinColumn(name = "location_id")
+	private Location location;
+	
+	
+///////////Methods
 	public Box() {
 	}
 	
@@ -131,6 +138,14 @@ public class Box {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 
 	@Override
