@@ -13,11 +13,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class BoxTest {
+class LocationTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Box box;
+	private Location location;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,20 +32,19 @@ class BoxTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		box = em.find(Box.class, 1);
+		location = em.find(Location.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		box = null;
+		location = null;
 	}
 
 	@Test
 	void test_Box_entity_mapping() {
-		assertNotNull(box);
-		assertEquals("Bedroom Closet 1", box.getName());
-		assertEquals(false, box.isFragile());
+		assertNotNull(location);
+		assertEquals("Storage Unit", location.getType());
 	}
 
 }

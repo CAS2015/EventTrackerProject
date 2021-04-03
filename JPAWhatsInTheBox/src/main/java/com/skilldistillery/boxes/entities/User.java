@@ -9,29 +9,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Box {
+public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String name;
+	@Column(name = "first_name")
+	private String firstName;
 	
-	private String room;
+	@Column(name = "last_name")
+	private String lastName;
 	
-	private String content;
+	private String email;
 	
-	@Column(name = "is_fragile")
-	private boolean isFragile;
+	private String username;
 	
-	@Column(name = "img1_url")
-	private String img1Url;
-	
-	@Column(name = "img2_url")
-	private String img2Url;
-	
-	@Column(name = "qr_code")
-	private String qrCode;
+	private String password;
 	
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
@@ -42,7 +36,7 @@ public class Box {
 	private boolean active;
 	
 
-	public Box() {
+	public User() {
 	}
 	
 	public int getId() {
@@ -53,60 +47,44 @@ public class Box {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getRoom() {
-		return room;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setRoom(String room) {
-		this.room = room;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getContent() {
-		return content;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public boolean isFragile() {
-		return isFragile;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setFragile(boolean isFragile) {
-		this.isFragile = isFragile;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getImg1Url() {
-		return img1Url;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setImg1Url(String img1Url) {
-		this.img1Url = img1Url;
-	}
-
-	public String getImg2Url() {
-		return img2Url;
-	}
-
-	public void setImg2Url(String img2Url) {
-		this.img2Url = img2Url;
-	}
-
-	public String getQrCode() {
-		return qrCode;
-	}
-
-	public void setQrCode(String qrCode) {
-		this.qrCode = qrCode;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -149,7 +127,7 @@ public class Box {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Box other = (Box) obj;
+		User other = (User) obj;
 		if (id != other.id)
 			return false;
 		return true;
@@ -158,9 +136,13 @@ public class Box {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Box [id=").append(id).append(", name=").append(name).append("]");
+		builder.append("User [id=").append(id).append(", firstName=").append(firstName).append(", lastName=")
+				.append(lastName).append(", email=").append(email).append(", username=").append(username)
+				.append(", password=").append(password).append(", createdAt=").append(createdAt).append(", updatedAt=")
+				.append(updatedAt).append(", active=").append(active).append("]");
 		return builder.toString();
 	}
+	
 	
 	
 	

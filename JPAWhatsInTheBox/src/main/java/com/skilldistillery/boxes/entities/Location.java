@@ -9,29 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Box {
+public class Location {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String name;
-	
-	private String room;
-	
-	private String content;
-	
-	@Column(name = "is_fragile")
-	private boolean isFragile;
-	
-	@Column(name = "img1_url")
-	private String img1Url;
-	
-	@Column(name = "img2_url")
-	private String img2Url;
-	
-	@Column(name = "qr_code")
-	private String qrCode;
+	private String type;
 	
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
@@ -42,7 +26,7 @@ public class Box {
 	private boolean active;
 	
 
-	public Box() {
+	public Location() {
 	}
 	
 	public int getId() {
@@ -53,60 +37,12 @@ public class Box {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getType() {
+		return type;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getRoom() {
-		return room;
-	}
-
-	public void setRoom(String room) {
-		this.room = room;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public boolean isFragile() {
-		return isFragile;
-	}
-
-	public void setFragile(boolean isFragile) {
-		this.isFragile = isFragile;
-	}
-
-	public String getImg1Url() {
-		return img1Url;
-	}
-
-	public void setImg1Url(String img1Url) {
-		this.img1Url = img1Url;
-	}
-
-	public String getImg2Url() {
-		return img2Url;
-	}
-
-	public void setImg2Url(String img2Url) {
-		this.img2Url = img2Url;
-	}
-
-	public String getQrCode() {
-		return qrCode;
-	}
-
-	public void setQrCode(String qrCode) {
-		this.qrCode = qrCode;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -149,7 +85,7 @@ public class Box {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Box other = (Box) obj;
+		Location other = (Location) obj;
 		if (id != other.id)
 			return false;
 		return true;
@@ -158,9 +94,12 @@ public class Box {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Box [id=").append(id).append(", name=").append(name).append("]");
+		builder.append("Location [id=").append(id).append(", type=").append(type).append(", createdAt=")
+				.append(createdAt).append(", updatedAt=").append(updatedAt).append(", active=").append(active)
+				.append("]");
 		return builder.toString();
 	}
+	
 	
 	
 	
