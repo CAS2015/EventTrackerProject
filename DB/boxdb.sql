@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   `active` TINYINT NULL,
+  `role` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -46,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `location` (
   `updated_at` DATETIME NULL,
   `active` TINYINT NULL,
   `user_id` INT NOT NULL,
+  `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_location_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_location_user1`
@@ -99,7 +101,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `boxdb`;
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `username`, `password`, `created_at`, `updated_at`, `active`) VALUES (1, 'Wally', 'Wallington', 'wwallington@fakeemail.com', 'demo', 'demo', NULL, NULL, 1);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `username`, `password`, `created_at`, `updated_at`, `active`, `role`) VALUES (1, 'Wally', 'Wallington', 'wwallington@fakeemail.com', 'demo', 'demo', NULL, NULL, 1, 'admin');
 
 COMMIT;
 
@@ -109,7 +111,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `boxdb`;
-INSERT INTO `location` (`id`, `type`, `created_at`, `updated_at`, `active`, `user_id`) VALUES (1, 'Storage Unit', NULL, NULL, 1, 1);
+INSERT INTO `location` (`id`, `type`, `created_at`, `updated_at`, `active`, `user_id`, `name`) VALUES (1, 'Storage Unit', NULL, NULL, 1, 1, 'SU 1');
 
 COMMIT;
 

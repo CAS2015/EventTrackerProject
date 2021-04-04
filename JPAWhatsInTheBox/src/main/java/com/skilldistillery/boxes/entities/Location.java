@@ -23,6 +23,8 @@ public class Location {
 	
 	private String type;
 	
+	private String name;
+	
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
 	
@@ -58,6 +60,14 @@ public class Location {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public LocalDateTime getCreatedAt() {
