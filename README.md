@@ -58,4 +58,4 @@ TODO: LINK TO DEPLOYED APP, LOGIN INFO IF NEEDED
 
 
 ## Database Schema
-[image](https://user-images.githubusercontent.com/12469178/113540569-a674ab00-959d-11eb-9e6e-1725c66870cb.png)
+![image](https://user-images.githubusercontent.com/12469178/113540569-a674ab00-959d-11eb-9e6e-1725c66870cb.png)
