@@ -21,18 +21,21 @@ USE `boxdb` ;
 DROP TABLE IF EXISTS `user` ;
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(45) NULL,
-  `last_name` VARCHAR(45) NULL,
-  `email` VARCHAR(100) NULL,
-  `username` VARCHAR(45) NULL,
-  `password` VARCHAR(45) NULL,
-  `created_at` DATETIME NULL,
-  `updated_at` DATETIME NULL,
-  `active` TINYINT NULL,
-  `role` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(45) NULL DEFAULT NULL,
+  `last_name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(100) NULL DEFAULT NULL,
+  `username` VARCHAR(45) NULL DEFAULT NULL,
+  `password` VARCHAR(45) NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT NULL,
+  `updated_at` DATETIME NULL DEFAULT NULL,
+  `active` TINYINT(4) NULL DEFAULT NULL,
+  `role` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -41,13 +44,13 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `location` ;
 
 CREATE TABLE IF NOT EXISTS `location` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `type` VARCHAR(45) NOT NULL,
-  `created_at` DATETIME NULL,
-  `updated_at` DATETIME NULL,
-  `active` TINYINT NULL,
-  `user_id` INT NOT NULL,
-  `name` VARCHAR(45) NULL,
+  `created_at` DATETIME NULL DEFAULT NULL,
+  `updated_at` DATETIME NULL DEFAULT NULL,
+  `active` TINYINT(4) NULL DEFAULT NULL,
+  `user_id` INT(11) NOT NULL,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_location_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_location_user1`
@@ -55,7 +58,9 @@ CREATE TABLE IF NOT EXISTS `location` (
     REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -64,18 +69,18 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `box` ;
 
 CREATE TABLE IF NOT EXISTS `box` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL,
-  `room` VARCHAR(45) NULL,
-  `content` TEXT NULL,
-  `is_fragile` TINYINT NULL,
-  `img1_url` VARCHAR(1000) NULL,
-  `img2_url` VARCHAR(1000) NULL,
-  `qr_code` VARCHAR(1000) NULL,
-  `created_at` DATETIME NULL,
-  `updated_at` DATETIME NULL,
-  `active` TINYINT NOT NULL,
-  `location_id` INT NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `room` VARCHAR(45) NULL DEFAULT NULL,
+  `content` TEXT NULL DEFAULT NULL,
+  `is_fragile` TINYINT(4) NULL DEFAULT NULL,
+  `img1_url` VARCHAR(1000) NULL DEFAULT NULL,
+  `img2_url` VARCHAR(1000) NULL DEFAULT NULL,
+  `qr_code` VARCHAR(1000) NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT NULL,
+  `updated_at` DATETIME NULL DEFAULT NULL,
+  `active` TINYINT(4) NOT NULL,
+  `location_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_box_location_idx` (`location_id` ASC),
   CONSTRAINT `fk_box_location`
@@ -83,7 +88,9 @@ CREATE TABLE IF NOT EXISTS `box` (
     REFERENCES `location` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
 
 SET SQL_MODE = '';
 DROP USER IF EXISTS boxuser@localhost;
@@ -101,7 +108,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `boxdb`;
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `username`, `password`, `created_at`, `updated_at`, `active`, `role`) VALUES (1, 'Wally', 'Wallington', 'wwallington@fakeemail.com', 'demo', 'demo', NULL, NULL, 1, 'admin');
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `username`, `password`, `created_at`, `updated_at`, `active`, `role`) VALUES (1, 'Wally', 'Wallington', 'wwallington@fakeemail.com', 'test', 'test', NULL, NULL, 1, 'admin');
 
 COMMIT;
 

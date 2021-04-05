@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User retrieveUserSignIn(String username, String password) {
+	public User signIn(String username, String password) {
 		User user = userRepo.findByUsername(username);
 		
 		if(user != null) {
@@ -70,6 +70,12 @@ public class UserServiceImpl implements UserService {
 	public User createUser(User user) {
 		
 		try {
+			if(userRepo.findByUsername(user.getUsername()) != null) {
+				throw new Exception();
+			}
+			user.setActive(true);
+			user.setCreatedAt(LocalDateTime.now());
+			user.setRole("user");
 			user = userRepo.save(user);
 		} catch (Exception e) {
 			user = null;

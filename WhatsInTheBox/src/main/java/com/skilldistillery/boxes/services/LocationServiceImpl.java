@@ -31,7 +31,7 @@ public class LocationServiceImpl implements LocationService {
 
 
 	@Override
-	public List<Location> allLoactionsFromUser(int userId) {
+	public List<Location> allLocationsFromUser(int userId) {
 
 		List<Location> locations = locRepo.findByUser_id(userId);
 		

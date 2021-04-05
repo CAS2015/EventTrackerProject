@@ -6,7 +6,7 @@ import com.skilldistillery.boxes.entities.Location;
 
 public interface LocationService {
 	
-	List<Location> allLoactionsFromUser(int userId);
+	List<Location> allLocationsFromUser(int userId);
 	Location retrieveLocation(int userId, int locId);
 	Location createLocation(int userId, Location location);
 	Location updateLocation(int userId, Location location);

@@ -60,7 +60,7 @@ public class BoxServiceImpl implements BoxService {
 	@Override
 	public List<Box> allBoxesFromLocation(int userId, int locId) {
 		List<Box> boxes = boxRepo.findByLocation_Id(locId);
-		
+
 		if(!boxes.isEmpty()) {
 			boolean valid = validate(boxes.get(0), userId, locId);
 			boxes = valid == true ? boxes : null;
@@ -84,9 +84,9 @@ public class BoxServiceImpl implements BoxService {
 		return boxes;
 	}
 
-
 	@Override
 	public List<Box> findByKeywordAndLocation(String keyword, int userId, int locId) {
+		keyword = "%" + keyword + "%";
 		List<Box> boxes = boxRepo.findByNameLikeOrContentLikeAndLocation_Id(keyword, keyword, locId);
 		
 		if(!boxes.isEmpty()) {
@@ -123,14 +123,14 @@ public class BoxServiceImpl implements BoxService {
 
 	@Override
 	public Box updateBox(int userId, int locId, Box box) {
-		Box managed = retrieveBox(userId, locId, locId);
+		Box managed = retrieveBox(userId, locId, box.getId());
 		
 		if(managed != null) {
 			managed.setContent(box.getContent());
 			managed.setFragile(box.isFragile());
 			managed.setImg1Url(box.getImg1Url());
 			managed.setImg2Url(box.getImg2Url());
-			managed.setLocation(box.getLocation());
+//			managed.setLocation(box.getLocation());
 			managed.setName(box.getName());
 			managed.setQrCode(box.getQrCode());
 			managed.setRoom(box.getRoom());
