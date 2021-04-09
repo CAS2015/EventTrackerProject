@@ -28,7 +28,6 @@ as needed.
 
 
 ## How to Run
-TODO: LINK TO DEPLOYED APP, LOGIN INFO IF NEEDED
 - Link: http://3.13.22.174:8080/WhatsInTheBox
 - username: TBD with front-end completion
 - password: TBD with front-end completion

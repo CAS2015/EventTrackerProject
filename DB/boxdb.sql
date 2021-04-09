@@ -93,7 +93,7 @@ AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 SET SQL_MODE = '';
-DROP USER IF EXISTS boxuser@localhost;
+-- DROP USER IF EXISTS boxuser@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 CREATE USER 'boxuser'@'localhost' IDENTIFIED BY 'boxuser';
 
@@ -131,4 +131,3 @@ USE `boxdb`;
 INSERT INTO `box` (`id`, `name`, `room`, `content`, `is_fragile`, `img1_url`, `img2_url`, `qr_code`, `created_at`, `updated_at`, `active`, `location_id`) VALUES (1, 'Bedroom Closet 1', 'Bedroom Closet', 'clothes', 0, NULL, NULL, NULL, NULL, NULL, 1, 1);
 
 COMMIT;
-
