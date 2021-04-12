@@ -33,7 +33,7 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	public List<Location> allLocationsFromUser(int userId) {
 
-		List<Location> locations = locRepo.findByUser_id(userId);
+		List<Location> locations = locRepo.findByUser_idAndActive(userId, true);
 		
 		if(!locations.isEmpty()) {
 			boolean valid = validate(locations.get(0), userId);

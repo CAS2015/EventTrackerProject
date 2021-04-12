@@ -59,8 +59,8 @@ public class BoxServiceImpl implements BoxService {
 
 	@Override
 	public List<Box> allBoxesFromLocation(int userId, int locId) {
-		List<Box> boxes = boxRepo.findByLocation_Id(locId);
-
+		List<Box> boxes = boxRepo.findByLocation_IdAndActive(locId,true);
+		
 		if(!boxes.isEmpty()) {
 			boolean valid = validate(boxes.get(0), userId, locId);
 			boxes = valid == true ? boxes : null;

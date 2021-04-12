@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What's In The Box</title>
+    <script src="lib/qrcode.min.js"></script>
     <script src="js/script.js"></script>
 </head>
 <body>
@@ -12,9 +13,35 @@
     <header id="header"></header>
 
     <main id="main">
+        <div id="homepage">
+            <button id="login">login</button>
+            <div id="homepageText">TODO: Put hompage content and maybe image 
+                or two.
+            </div>
+        </div>
         <div id="errors"></div>
-        <div id="userDetails"></div>
-        <div id="userTable"></div>
+        <div id="locationsTable"></div>
+        <div id="boxesTable"></div>
+        <div id="locationFormDiv">
+            <!-- <form name="addLocationForm">
+                Name: <input type="text" name="name"><br>
+                Type: <input type="text" name="type" list="typelist">
+                        <datalist id="typelist">
+                            <option value="Move">Move</option>
+                            <option value="Storage Unit">Storage Unit</option>
+                            <option value="Basement">Basement</option>
+                            <option value="Attic">Attic</option>
+                        </datalist>
+                      </select><br>
+                <button type="button" name="addNewLocation">Add Location</button>
+              </form> -->
+        </div>
+        <div id="boxDetails"></div>
+        <div id="boxFormDiv"></div>
+        <div id="qrcode"></div>
+        
+        
+
     </main>
 </body>
 </html>
