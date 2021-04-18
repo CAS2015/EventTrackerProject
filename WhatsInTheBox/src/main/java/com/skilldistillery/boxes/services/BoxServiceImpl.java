@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.boxes.entities.Box;
 import com.skilldistillery.boxes.entities.Location;
-import com.skilldistillery.boxes.entities.User;
 import com.skilldistillery.boxes.repositories.BoxRepository;
+import com.skilldistillery.boxes.repositories.UserRepository;
 
 @Service
 @Transactional
@@ -20,6 +20,9 @@ public class BoxServiceImpl implements BoxService {
 	
 	@Autowired
 	private BoxRepository boxRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 
 	
 	@Override
@@ -29,7 +32,7 @@ public class BoxServiceImpl implements BoxService {
 
 
 	@Override
-	public Box retrieveBox(int userId, int locId, int boxId) {
+	public Box retrieveBox(String username, int locId, int boxId) {
 		Optional<Box> boxOp = boxRepo.findById(boxId);
 		Box box;
 		
@@ -37,7 +40,7 @@ public class BoxServiceImpl implements BoxService {
 			box = boxOp.get();
 			
 			//check that the box matches the proper user and location
-			boolean valid = validate(box, userId, locId);
+			boolean valid = validate(box, username, locId);
 			
 			//set box to itself if it's valid, set it to null if it's not.
 			box = valid == true ? box : null;
@@ -48,8 +51,8 @@ public class BoxServiceImpl implements BoxService {
 		return box;
 	}
 
-	private boolean validate(Box box, int userId, int locId) {
-		if( box.getLocation().getId() == locId && box.getLocation().getUser().getId() == userId) {
+	private boolean validate(Box box, String username, int locId) {
+		if( box.getLocation().getId() == locId && box.getLocation().getUser().getUsername().equals(username)) {
 			return true;
 		}
 		else {
@@ -58,11 +61,11 @@ public class BoxServiceImpl implements BoxService {
 	}
 
 	@Override
-	public List<Box> allBoxesFromLocation(int userId, int locId) {
+	public List<Box> allBoxesFromLocation(String username, int locId) {
 		List<Box> boxes = boxRepo.findByLocation_IdAndActive(locId,true);
 		
 		if(!boxes.isEmpty()) {
-			boolean valid = validate(boxes.get(0), userId, locId);
+			boolean valid = validate(boxes.get(0), username, locId);
 			boxes = valid == true ? boxes : null;
 		}
 		
@@ -72,11 +75,11 @@ public class BoxServiceImpl implements BoxService {
 
 
 	@Override
-	public List<Box> filterByLocationAndRoom(String room, int userId, int locId) {
+	public List<Box> filterByLocationAndRoom(String room, String username, int locId) {
 		List<Box> boxes = boxRepo.findByRoomAndLocation_Id(room, locId);
 		
 		if(!boxes.isEmpty()) {
-			boolean valid = validate(boxes.get(0), userId, locId);
+			boolean valid = validate(boxes.get(0), username, locId);
 			boxes = valid == true ? boxes : null;
 		}
 		
@@ -85,12 +88,12 @@ public class BoxServiceImpl implements BoxService {
 	}
 
 	@Override
-	public List<Box> findByKeywordAndLocation(String keyword, int userId, int locId) {
+	public List<Box> findByKeywordAndLocation(String keyword, String username, int locId) {
 		keyword = "%" + keyword + "%";
 		List<Box> boxes = boxRepo.findByNameLikeOrContentLikeAndLocation_Id(keyword, keyword, locId);
 		
 		if(!boxes.isEmpty()) {
-			boolean valid = validate(boxes.get(0), userId, locId);
+			boolean valid = validate(boxes.get(0), username, locId);
 			boxes = valid == true ? boxes : null;
 		}
 		
@@ -100,15 +103,13 @@ public class BoxServiceImpl implements BoxService {
 
 
 	@Override
-	public Box createBox(int userId, int locId, Box box) {
-		User user = new User();
-		user.setId(userId);
+	public Box createBox(String username, int locId, Box box) {
 		
 		Location location = new Location();
 		location.setId(locId);
 		
 		try {
-			location.setUser(user);
+			location.setUser(userRepo.findByUsername(username));
 			box.setLocation(location);
 			box.setActive(true);
 			box.setCreatedAt(LocalDateTime.now());
@@ -122,8 +123,8 @@ public class BoxServiceImpl implements BoxService {
 
 
 	@Override
-	public Box updateBox(int userId, int locId, Box box) {
-		Box managed = retrieveBox(userId, locId, box.getId());
+	public Box updateBox(String username, int locId, Box box) {
+		Box managed = retrieveBox(username, locId, box.getId());
 		
 		if(managed != null) {
 			managed.setContent(box.getContent());
@@ -143,8 +144,8 @@ public class BoxServiceImpl implements BoxService {
 
 
 	@Override
-	public boolean deleteBox(int userId, int locId, int boxId) {
-		Box managed = retrieveBox(userId, locId, boxId);
+	public boolean deleteBox(String username, int locId, int boxId) {
+		Box managed = retrieveBox(username, locId, boxId);
 		boolean deleted = false;
 		
 		if(managed != null) {

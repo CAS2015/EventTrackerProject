@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -34,9 +37,11 @@ public class User {
 	private String role;
 	
 	@Column(name = "created_at")
+	@CreationTimestamp
 	private LocalDateTime createdAt;
 	
 	@Column(name = "updated_at")
+	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
 	private boolean active;

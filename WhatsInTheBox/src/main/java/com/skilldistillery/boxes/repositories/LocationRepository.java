@@ -8,5 +8,5 @@ import com.skilldistillery.boxes.entities.Location;
 
 public interface LocationRepository extends JpaRepository<Location, Integer> {
 	
-	List<Location> findByUser_idAndActive(int id, boolean isactive);
+	List<Location> findByUser_usernameAndActive(String username, boolean isactive);
 }

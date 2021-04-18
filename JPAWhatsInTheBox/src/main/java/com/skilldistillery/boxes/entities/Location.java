@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -26,9 +29,11 @@ public class Location {
 	private String name;
 	
 	@Column(name = "created_at")
+	@CreationTimestamp
 	private LocalDateTime createdAt;
 	
 	@Column(name = "updated_at")
+	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
 	private boolean active;
@@ -135,12 +140,13 @@ public class Location {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Location [id=").append(id).append(", type=").append(type).append(", createdAt=")
-				.append(createdAt).append(", updatedAt=").append(updatedAt).append(", active=").append(active)
-				.append("]");
+		builder.append("Location [id=").append(id).append(", type=").append(type).append(", name=").append(name)
+				.append(", createdAt=").append(createdAt).append(", updatedAt=").append(updatedAt).append(", active=")
+				.append(active).append("]");
 		return builder.toString();
 	}
-	
+
+
 	
 	
 	

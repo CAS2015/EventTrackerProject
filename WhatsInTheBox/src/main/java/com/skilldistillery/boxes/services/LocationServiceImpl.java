@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.boxes.entities.Location;
-import com.skilldistillery.boxes.entities.User;
 import com.skilldistillery.boxes.repositories.LocationRepository;
+import com.skilldistillery.boxes.repositories.UserRepository;
 
 @Service
 @Transactional
@@ -19,9 +19,13 @@ public class LocationServiceImpl implements LocationService {
 	
 	@Autowired
 	private LocationRepository locRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 
-	private boolean validate(Location loc, int userId) {
-		if( loc.getUser().getId() == userId) {
+	private boolean validate(Location loc, String username) {
+
+		if( loc.getUser().getUsername().equals(username)) {
 			return true;
 		}
 		else {
@@ -31,21 +35,21 @@ public class LocationServiceImpl implements LocationService {
 
 
 	@Override
-	public List<Location> allLocationsFromUser(int userId) {
+	public List<Location> allLocationsFromUser(String username) {
 
-		List<Location> locations = locRepo.findByUser_idAndActive(userId, true);
-		
+		List<Location> locations = locRepo.findByUser_usernameAndActive(username, true);
 		if(!locations.isEmpty()) {
-			boolean valid = validate(locations.get(0), userId);
+			boolean valid = validate(locations.get(0), username);
 			locations = valid == true ? locations : null;
+
 		}		
-		
+
 		return locations;
 	}
 
 
 	@Override
-	public Location retrieveLocation(int userId, int locId) {
+	public Location retrieveLocation(String username, int locId) {
 		Optional<Location> locOp = locRepo.findById(locId);
 		Location loc;
 		
@@ -53,7 +57,7 @@ public class LocationServiceImpl implements LocationService {
 			loc = locOp.get();
 			
 			//check that the location matches the proper user and location
-			boolean valid = validate(loc, userId);
+			boolean valid = validate(loc, username);
 			
 			//set box to itself if it's valid, set it to null if it's not.
 			loc = valid == true ? loc : null;
@@ -66,12 +70,10 @@ public class LocationServiceImpl implements LocationService {
 
 
 	@Override
-	public Location createLocation(int userId, Location location) {
-		User user = new User();
-		user.setId(userId);
-		
+	public Location createLocation(String username, Location location) {
+
 		try {
-			location.setUser(user);
+			location.setUser(userRepo.findByUsername(username));
 			location.setActive(true);
 			location.setCreatedAt(LocalDateTime.now());
 			location = locRepo.save(location);
@@ -84,8 +86,8 @@ public class LocationServiceImpl implements LocationService {
 
 
 	@Override
-	public Location updateLocation(int userId, Location location) {
-		Location managed = retrieveLocation(userId, location.getId());
+	public Location updateLocation(String username, Location location) {
+		Location managed = retrieveLocation(username, location.getId());
 		
 		if(managed != null) {
 			managed.setType(location.getType());
@@ -99,8 +101,8 @@ public class LocationServiceImpl implements LocationService {
 
 
 	@Override
-	public boolean deleteLocation(int userId, int locId) {
-		Location managed = retrieveLocation(userId, locId);
+	public boolean deleteLocation(String username, int locId) {
+		Location managed = retrieveLocation(username, locId);
 		boolean deleted = false;
 		
 		if(managed != null) {

@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 public class Box {
 	
@@ -36,9 +39,11 @@ public class Box {
 	private String qrCode;
 	
 	@Column(name = "created_at")
+	@CreationTimestamp
 	private LocalDateTime createdAt;
 	
 	@Column(name = "updated_at")
+	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
 	private boolean active;

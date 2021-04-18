@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <h1>Your Boxes</h1>
+
+  <table *ngIf="!selected">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Room</th>
+        <th>Image</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let box of boxes" (click)='boxDetails(box)'>
+      <td>{{box.id}}</td>
+      <td>{{box.name}}</td>
+      <td>{{box.room}}</td>
+      <td><img [src]="box.img1Url"></td>
+    </tr>
+  </table>
+
+  <table *ngIf="selected">
+    <tr>
+      <td>Id</td>
+      <td>{{selected.id}}</td>
+    </tr>
+    <tr>
+      <td>Name</td>
+      <td>{{selected.name}}</td>
+    </tr>
+    <tr>
+     <td>Room</td>
+     <td>{{selected.room}}</td>
+    </tr>
+    <tr>
+     <td>Fragile</td>
+     <td>{{selected.isFragile}}</td>
+    </tr>
+    <tr>
+      <td>Image 1</td>
+      <td><img [src]="selected.img1Url"></td>
+    </tr>
+    <tr>
+      <td>Image 2</td>
+      <td><img [src]="selected.img2Url"></td>
+    </tr>
+  </table>
+  <div id="qrcode"></div>
+</div>
+

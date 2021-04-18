@@ -6,10 +6,10 @@ import com.skilldistillery.boxes.entities.Location;
 
 public interface LocationService {
 	
-	List<Location> allLocationsFromUser(int userId);
-	Location retrieveLocation(int userId, int locId);
-	Location createLocation(int userId, Location location);
-	Location updateLocation(int userId, Location location);
-	boolean deleteLocation(int userId, int locId);
+	List<Location> allLocationsFromUser(String username);
+	Location retrieveLocation(String username, int locId);
+	Location createLocation(String username, Location location);
+	Location updateLocation(String username, Location location);
+	boolean deleteLocation(String username, int locId);
 
 }

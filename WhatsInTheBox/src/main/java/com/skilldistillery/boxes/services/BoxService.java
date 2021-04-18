@@ -7,12 +7,12 @@ import com.skilldistillery.boxes.entities.Box;
 public interface BoxService {
 	
 	List<Box> allBoxes();
-	Box retrieveBox(int userId, int locId, int boxId);
-	List<Box> allBoxesFromLocation(int userId, int locId);
-	List<Box> filterByLocationAndRoom (String room, int userId, int locId);
-	List<Box> findByKeywordAndLocation (String keyword, int userId, int locId);
-	Box createBox(int userId, int locId, Box box);
-	Box updateBox(int userId, int locId, Box box);
-	boolean deleteBox(int userId, int locId, int boxId);
+	Box retrieveBox(String username, int locId, int boxId);
+	List<Box> allBoxesFromLocation(String username, int locId);
+	List<Box> filterByLocationAndRoom (String room, String username, int locId);
+	List<Box> findByKeywordAndLocation (String keyword, String username, int locId);
+	Box createBox(String username, int locId, Box box);
+	Box updateBox(String username, int locId, Box box);
+	boolean deleteBox(String username, int locId, int boxId);
 
 }
