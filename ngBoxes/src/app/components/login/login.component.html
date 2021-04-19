@@ -1,6 +1,9 @@
-<form #loginForm = "ngForm">
-  <input type="text" name="username" placeholder="username" ngModel>
-  <input type="password" name="password" placeholder="password" ngModel>
-  <input type="submit" name="submit" value="Login" (click)="login(loginForm)">
-</form>
+<div class="card login">
+  <h3>Login</h3>
+  <form #loginForm = "ngForm" class="form">
+    <input type="text" name="username" placeholder="username" ngModel><br>
+    <input type="password" name="password" placeholder="password" ngModel><br>
+    <input class="btn btn-dark" type="submit" name="submit" value="Login" (click)="login(loginForm)">
+  </form>
 
+</div>

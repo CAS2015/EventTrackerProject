@@ -3,7 +3,7 @@ export class Box {
   name: string;
   room: string;
   content: string;
-  isFragile: boolean;
+  fragile: boolean;
   img1Url: string;
   img2Url: string;
   qrCode: string;
@@ -14,7 +14,7 @@ export class Box {
     name?: string,
     room?: string,
     content?: string,
-    isFragile?: boolean,
+    fragile?: boolean,
     img1Url?: string,
     img2Url?: string,
     qrCode?: string
@@ -23,7 +23,7 @@ export class Box {
       this.name = name;
       this.room = room;
       this.content = content;
-      this.isFragile = isFragile;
+      this.fragile = fragile;
       this.img1Url = img1Url;
       this.img2Url = img2Url;
       this.qrCode = qrCode;

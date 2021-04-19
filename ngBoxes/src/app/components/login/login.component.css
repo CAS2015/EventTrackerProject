@@ -1,0 +1,13 @@
+.login {
+  width: fit-content;
+  margin-left: 40%;
+  margin-top: 20px;
+  border: 1px solid black;
+  background-color: lightgray;
+}
+.login input {
+  margin: 5px 10px;
+}
+.login h3 {
+  margin: 5px 10px;
+}

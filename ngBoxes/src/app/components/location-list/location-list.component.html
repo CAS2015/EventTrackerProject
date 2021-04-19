@@ -1,5 +1,6 @@
 <div class="container">
-  <h3>Your Locations</h3>
+  <h3 *ngIf="!updateLocation">Your Locations</h3>
+  <h3 *ngIf="updateLocation">Update Location</h3>
 
   <table class="table table-striped table-hover" *ngIf="!updateLocation">
     <thead class="thead thead-dark">
@@ -13,19 +14,19 @@
       <tr>
         <td><input required="required" type="text" name="name" placeholder="'Unit 48 on 111 13th St' or 'Move to Denver'" [(ngModel)]="newLocation.name"></td>
         <td><input required="required" type="text" name="type" placeholder="Storage Unit, Move, Basement, etc." [(ngModel)]="newLocation.type"></td>
-        <td><input type="submit" value="+" (click)="addNewLocation()"></td>
+        <td><input class="btn btn-success" type="submit" value="+" (click)="addNewLocation()"></td>
       </tr>
       <tr *ngFor="let loc of locations" (click)="listBoxes(loc.id)">
         <td>{{loc.name}}</td>
         <td>{{loc.type}}</td>
-        <td><input type="submit" value="Edit" (click)="editLocation(loc)"></td>
+        <td><input class="btn btn-success" type="submit" value="Edit" (click)="editLocation(loc)"></td>
       </tr>
     </tbody>
   </table>
 
-  <form *ngIf="updateLocation">
-    Name:<input type="text" name="name" value="{{updateLocation.name}}" [(ngModel)]="updateLocation.name"><br>
-    Type:<input type="text" name="type" value="{{updateLocation.type}}" [(ngModel)]="updateLocation.type"><br>
+  <form *ngIf="updateLocation" class="form">
+    Name: <input type="text" name="name" value="{{updateLocation.name}}" [(ngModel)]="updateLocation.name"><br>
+    Type: <input type="text" name="type" value="{{updateLocation.type}}" [(ngModel)]="updateLocation.type"><br>
     <input class="btn btn-success" type="submit" value="Update" (click)="completeEdit()">
     <button class="btn btn-danger" (click)="delete()">Delete</button>
     <button class="btn btn-dark" (click)="cancel()">Cancel</button>

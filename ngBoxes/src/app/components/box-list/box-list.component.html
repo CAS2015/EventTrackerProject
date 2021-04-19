@@ -1,31 +1,37 @@
-<div class="container-fluid">
-  <h1>Your Boxes</h1>
+<div class="container" *ngIf="!selected && !addBox">
+  <h1 class= "row">
+    <span class="col"> Your Boxes</span>
+    <span class="col h1btnspan">
+      <button class="btn btn-success" (click)="addNew()">Add New</button>
+    </span>
+  </h1>
 
-  <table *ngIf="!selected">
+  <table  class="table table-striped table-hover">
     <thead>
-      <tr>
+      <tr class="thead thead-dark">
         <th>Id</th>
         <th>Name</th>
         <th>Room</th>
         <th>Image</th>
       </tr>
     </thead>
-    <tr *ngFor="let box of boxes" (click)='boxDetails(box)'>
-      <td>{{box.id}}</td>
-      <td>{{box.name}}</td>
-      <td>{{box.room}}</td>
-      <td><img [src]="box.img1Url"></td>
-    </tr>
+    <tbody>
+      <tr *ngFor="let box of boxes" (click)='boxDetails(box)'>
+        <td>{{box.id}}</td>
+        <td>{{box.name}}</td>
+        <td>{{box.room}}</td>
+        <td><img [src]="box.img1Url"></td>
+      </tr>
+    </tbody>
   </table>
+  </div>
 
-  <table *ngIf="selected">
+  <div class="container" *ngIf="selected && !addBox" >
+  <h1>{{selected.name}}</h1>
+  <table class="table detailsTable">
     <tr>
       <td>Id</td>
       <td>{{selected.id}}</td>
-    </tr>
-    <tr>
-      <td>Name</td>
-      <td>{{selected.name}}</td>
     </tr>
     <tr>
      <td>Room</td>
@@ -33,7 +39,7 @@
     </tr>
     <tr>
      <td>Fragile</td>
-     <td>{{selected.isFragile}}</td>
+     <td>{{selected.fragile}}</td>
     </tr>
     <tr>
       <td>Image 1</td>
@@ -43,7 +49,36 @@
       <td>Image 2</td>
       <td><img [src]="selected.img2Url"></td>
     </tr>
+    <tr>
+      <td>Content Description</td>
+      <td>{{selected.content}}</td>
+    </tr>
   </table>
-  <div id="qrcode"></div>
 </div>
+<div id="qrcode" class="container">
+</div>
+<br>
+<div class="container boxformbtns" *ngIf="selected && !addBox">
+    <span class="col"><button class="btn btn-success" (click)="updateBox(selected)">Edit</button></span>
+    <span class="col"><button class="btn btn-danger" (click)="deleteBox(selected.id)">Delete</button></span>
+    <span class="col"><button class="btn btn-dark" (click)=back()>Back</button></span>
+</div>
+
+
+<div class="container" *ngIf="addBox" >
+  <h1 *ngIf="!update">Add New Box</h1>
+  <h1 *ngIf="update">Update Box</h1>
+  <form class="form addBoxForm">
+    Name: <input type="text" name="name" value="{{selected.name}}" [(ngModel)]="selected.name"><br>
+    Room: <input type="text" name="room" value="{{selected.room}}" [(ngModel)]="selected.room"><br>
+    Fragile: <input type="checkbox" name="fragile" value="{{selected.fragile}}" [(ngModel)]="selected.fragile"><br>
+    Image 1 Url: <input type="text" name="img1Url" value="{{selected.img1Url}}" [(ngModel)]="selected.img1Url"><br>
+    Image 2 Url: <input type="text" name="img2Url" value="{{selected.img2Url}}" [(ngModel)]="selected.img2Url"><br>
+    Content Description: <input type="text" name="content" value="{{selected.content}}" [(ngModel)]="selected.content"><br>
+    <span class= "addBoxBtn"><input *ngIf="!update" class="btn btn-success" type="submit" name="submit" value="Add Box" (click)="createBox(selected)"></span>
+    <span class= "addBoxBtn"><input *ngIf="update" class="btn btn-success" type="submit" name="submit" value="Update Box" (click)="createBox(selected)"></span>
+    <span class= "addBoxBtn"><button class="btn btn-dark" (click)=back()>Back</button></span>
+  </form>
+</div>
+
 
